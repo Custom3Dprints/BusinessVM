@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vino Mío</title>
+    <link rel="stylesheet"  href="../src/styles/Events.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="image">
+            <h2>Upload an Image</h2>
+            <div id="drop-area">
+                <p>Drag & Drop an image here or <span id="file-button">choose file</span></p>
+                <input type="file" id="file-input" accept="image/*" hidden>
+            </div>
+            <div id="file-details"></div>
+            <div id="preview"></div>
+        </div>
+        <div class="date">
+            <label for="date">Select Date:</label>
+            <input type="date" id="date" name="date" required><br><br>
+        </div>
+        <div class="description">
+            <label for="description">Description:</label><br>
+            <textarea name="description" id="description" cols="30" rows="4"></textarea><br>
+        </div>
+
+        <button type="preview" id="preview-button">Preview</button>
+        <button type="submit" id="submit-button">Submit</button>
+
+        <div id="preview-container"></div>
+    </div>
+
+    <!--
+        -->
+    <div id="app"></div>
+    <script src="../dist/Events.bundle.js"></script>
+    
+    <!-- Your custom JS files -->
+    <script type="module" src="../src/firebase-config.js"></script>
+    <script src="../src/Events.js"></script>
+</body>
+</html>
