@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif; /* You can change this to your preferred font */
+    margin: 0;
+    padding: 0;
+}
+
+.Reservations {
+    display: flex; /* Use flexbox to arrange children side by side */
+    width: 100%; /* Full width of the parent */
+    height: 90vh; /* Full height of the viewport, adjust as needed */
+    border: 2px solid red;
+}
+
+.reservation-container {
+    display: flex;
+    
+    width: 100%; /* Full width of the parent */
+    height: 90vh; /* Full height of the viewport, adjust as needed */
+    border: 2px solid rgb(106, 6, 6);
+}
+
+.left-reservation-section{
+    border: 2px solid rgb(0, 255, 247);
+    height: 100%;
+    width: 50%;
+}
+.right-reservation-section{
+    border: 2px solid rgb(14, 115, 248);
+    height: 100%;
+    width: 50%;
+}
+
+.reservationelement{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.reservationelement p{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+h1 {
+    margin: 0 0 20px; /* Add margin to the heading */
+}
+
+
+

@@ -4,7 +4,8 @@ const Dotenv = require('dotenv-webpack');
 
 module.exports = {
     entry: {
-        Events: './src/firebase-config.js'
+        Events: './src/firebase-config.js',
+        Reservations: './src/Reservations.js'
         
     },
     output: {
