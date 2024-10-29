@@ -37,25 +37,35 @@ async function displayReservations() {
         const reservationsTdy = [];
         const reservationsWeek = [];
 
+        // Helper function to convert 24-hour to 12-hour format
+        const convertToStandardTime = (time) => {
+            const [hours, minutes] = time.split(':').map(Number);
+            const suffix = hours >= 12 ? 'PM' : 'AM';
+            const adjustedHours = ((hours + 11) % 12) + 1;
+            return `${adjustedHours}:${String(minutes).padStart(2, '0')} ${suffix}`;
+        };
+
         // Loop through each document in the snapshot
         snapshot.forEach(doc => {
             const reservationData = doc.data();
             const getDate = new Date(reservationData.date);
-
-            // Adjust the date for time zone if necessary
             const adjustedDate = new Date(getDate.getTime() + getDate.getTimezoneOffset() * 60000);
+
+            // Combine date and time for sorting
+            const dateTimeString = `${reservationData.date}T${reservationData.time}`;
+            const fullDateTime = new Date(dateTimeString);
 
             // Check if the reservation date is today or within the week
             if (adjustedDate.getTime() === today.getTime()) {
-                reservationsTdy.push({ ...reservationData, adjustedDate });
+                reservationsTdy.push({ ...reservationData, fullDateTime });
             } else if (adjustedDate > today && adjustedDate <= endDate) {
-                reservationsWeek.push({ ...reservationData, adjustedDate });
+                reservationsWeek.push({ ...reservationData, fullDateTime });
             }
         });
 
-        // Sort reservations by date
-        reservationsTdy.sort((a, b) => a.adjustedDate - b.adjustedDate);
-        reservationsWeek.sort((a, b) => a.adjustedDate - b.adjustedDate);
+        // Sort reservations by full date and time
+        reservationsTdy.sort((a, b) => a.fullDateTime - b.fullDateTime);
+        reservationsWeek.sort((a, b) => a.fullDateTime - b.fullDateTime);
 
         // Function to create a section for reservations
         const createReservationSection = (reservations, title) => {
@@ -73,12 +83,11 @@ async function displayReservations() {
             } else {
                 // Create reservation elements for each reservation
                 reservations.forEach(reservationData => {
-
                     const reservationElement = document.createElement('div');
                     reservationElement.className = 'reservationelement';
                     reservationElement.innerHTML = `
-                        <p>Date: ${reservationData.adjustedDate.toLocaleDateString()}</p>
-                        <p>Time: ${reservationData.time}</p>
+                        <p>Date: ${reservationData.fullDateTime.toLocaleDateString()}</p>
+                        <p>Time: ${convertToStandardTime(reservationData.time)}</p>
                         <p>Name: ${reservationData.name}</p>
                         <p>Number of Guests: ${reservationData.people}</p>
                         <p>Email: ${reservationData.email}</p>
@@ -108,6 +117,7 @@ async function displayReservations() {
         console.error("Error fetching reservations:", error);
     }
 }
+
 
 // Function to format phone numbers (example implementation)
 function formatPhoneNumber(phone) {

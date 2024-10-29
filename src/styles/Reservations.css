@@ -8,24 +8,26 @@ body {
     display: flex; /* Use flexbox to arrange children side by side */
     width: 100%; /* Full width of the parent */
     height: 90vh; /* Full height of the viewport, adjust as needed */
-    border: 2px solid red;
+    /*border: 2px solid red;*/
+    
+    justify-content: center;
 }
 
 .reservation-container {
     display: flex;
     
-    width: 100%; /* Full width of the parent */
-    height: 90vh; /* Full height of the viewport, adjust as needed */
-    border: 2px solid rgb(106, 6, 6);
+    width: 60%; /* Full width of the parent */
+    height: 100%; /* Full height of the viewport, adjust as needed */
+
 }
 
 .left-reservation-section{
-    border: 2px solid rgb(0, 255, 247);
+
     height: 100%;
     width: 50%;
 }
 .right-reservation-section{
-    border: 2px solid rgb(14, 115, 248);
+
     height: 100%;
     width: 50%;
 }
@@ -38,6 +40,10 @@ body {
 .reservationelement p{
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.info{
+    padding: 10px;
 }
 
 h1 {
