@@ -1,0 +1,29 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vino Mío</title>
+    <link rel="stylesheet"  href="../src/styles/ClosedDays.css">
+    <script src="../src/navbar.js"></script>
+</head>
+<body>
+    <nav id="navbar"></nav>
+
+    <div class="container">
+        <div class="date">
+            <label for="date">Select Date:</label>
+            <input type="date" id="date" name="date" required><br><br>
+        </div>
+        <button type="submit" id="submit-button">Submit</button>
+    </div>
+
+    <div id="app"></div>
+    <script src="../dist/ClosedDays.bundle.js"></script>
+    
+    <!-- Your custom JS files -->
+    <script type="module" src="../src/ClosedDays.js"></script>
+</body>
+</html>
+
+
+

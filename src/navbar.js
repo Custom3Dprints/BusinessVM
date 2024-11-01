@@ -7,6 +7,7 @@ fetch('../public/navbar.html')
 		// Attach event listeners
 		document.getElementById('Events-link').addEventListener('click', () => window.location.href = "../public/Events.html");
 		document.getElementById('Reservations-link').addEventListener('click', () => window.location.href = "../public/Reservations.html");
+		document.getElementById('Closed-link').addEventListener('click', () => window.location.href = "../public/ClosedDays.html");
 		
 		
 		// Mobile menu toggle
