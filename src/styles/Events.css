@@ -133,6 +133,19 @@ button[type="submit"] {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+#submit-button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #4a90e2;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
 button[type="submit"]:hover {
     background-color: #357abd;
@@ -161,3 +174,19 @@ button[type="submit"]:hover {
     }
 }
 
+
+
+/*Remove Event*/
+
+.anti-container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f8f8;
+}
+
+.removeEvent{
+    width: 30%;
+    padding: 20px;
+}

@@ -1,6 +1,6 @@
 // Import Firebase and Firestore
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, addDoc, query, where, deleteDoc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 // Initialize Firebase
@@ -18,6 +18,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
+
 
 // Preview functionality
 document.getElementById("preview-button").addEventListener("click", function() {
@@ -48,7 +49,7 @@ document.getElementById("preview-button").addEventListener("click", function() {
 });
 
 // Submit functionality
-document.querySelector('button[type="submit"]').addEventListener("click", async function() {
+document.getElementById('submit-button').addEventListener("click", async function() {
     const fileInput = document.getElementById("file-input");
     const descriptionText = document.getElementById("description").value;
     const dateValue = document.getElementById("date").value;
@@ -94,3 +95,40 @@ document.querySelector('button[type="submit"]').addEventListener("click", async 
     }
 });
 
+
+async function removeEvent(event) {
+    event.preventDefault(); // Prevents the page from refreshing
+
+    const date = document.getElementById('remove-date').value;
+    console.log(`Attempting to delete events with date: ${date}`); // Log the entered date
+
+    try {
+        // Query Events
+        const getEvents = query(
+            collection(db, "Events"),
+            where('date', '==', date)
+        );
+        const eventSnapshot = await getDocs(getEvents);
+
+        console.log(`Documents found: ${eventSnapshot.size}`); // Log the number of documents found
+
+        // Check and delete the document in the correct collection
+        if (!eventSnapshot.empty) {
+            for (const doc of eventSnapshot.docs) {
+                await deleteDoc(doc.ref);
+                console.log(`Document with ID: ${doc.id} deleted from Events`);
+                
+            }
+            
+        } else {
+            console.log("No matching documents found for deletion.");
+            alert("No events found for the selected date.");
+        }
+    } catch (error) {
+        console.error("Error deleting document:", error);
+        alert("An error occurred while deleting events.");
+    }
+}
+
+// Attach the function to the form submit event
+document.getElementById('remove-button').addEventListener('click', removeEvent);

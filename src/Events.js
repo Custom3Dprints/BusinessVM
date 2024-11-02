@@ -52,9 +52,6 @@ function validateImage(file) {
     }
 }
 
-
-
-
 // JavaScript to handle image preview and description display
 document.getElementById("preview-button").addEventListener("click", function() {
     const fileInput = document.getElementById("file-input");

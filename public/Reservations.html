@@ -1,9 +1,10 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vino Mío</title>
-    <link rel="stylesheet" href="../src/styles/Reservations.css">
+    <link rel="stylesheet"  href="../src/styles/Reservations.css">
     <script src="../src/navbar.js"></script>
 </head>
 <body>
@@ -21,10 +22,33 @@
         </div>
     </div>
 
+    <div class="getRemove">
+        <div class="remove">
+            <h2>Remove Reservation</h2>
+            <form id="reservationForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name"><br><br>
+                
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" placeholder="123-456-7890"><br><br>
+                
+                <label for="date">Select Date:</label>
+                <input type="date" id="date" name="date"><br><br>
+
+                <label for="time">Select Time:</label>
+                <select id="time" name="time"></select>
+                
+                <button type="submit" id="submitBtn" value="Send Email">Remove</button> <!--onclick="Submitbtn()"-->
+            </form>
+        </div>
+    </div>
+
     <div id="app"></div>
     <script src="../dist/Reservations.bundle.js"></script>
 
 
     <script type="module" src="../src/Reservations.js"></script>
+    <script src="../src/Reservation.js"></script>
+
 </body>
 </html>

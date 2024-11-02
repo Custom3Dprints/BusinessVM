@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, addDoc, query, where, deleteDoc } from 'firebase/firestore';
 
 // Firebase configuration
 const firebaseConfig = {
@@ -17,8 +17,6 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 
-
-
 async function displayReservations() {
     try {
         // Fetch reservation documents from Firestore
@@ -30,7 +28,7 @@ async function displayReservations() {
 
         // Set the end date for the week (7 days from today)
         const endDate = new Date();
-        endDate.setDate(today.getDate() + 6);
+        endDate.setDate(today.getDate() + 8);
         endDate.setHours(23, 59, 59, 999);
 
         // Arrays to hold today's and this week's reservations
@@ -133,5 +131,40 @@ function formatPhoneNumber(phone) {
 // Initialize the reservation display after the document is fully loaded
 document.addEventListener("DOMContentLoaded", displayReservations);
 
+
+
+async function removeReservation(event) {
+    event.preventDefault(); // Prevents the page from refreshing
+
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const date = document.getElementById('date').value;
+
+    try {
+        // Query Reservations
+        const getReservations = query(
+            collection(db, "Reservations"),
+            where('name', '==', name),
+            where('phone', '==', phone),
+            where('date', '==', date)
+        );
+        const ReservationsSnapshot = await getDocs(getReservations);
+
+        // Check and delete the document in the correct collection
+        if (!ReservationsSnapshot.empty) {
+            ReservationsSnapshot.forEach(async (doc) => {
+                await deleteDoc(doc.ref);
+                console.log(`Document with ID: ${doc.id} deleted from Reservations`);
+            });
+        } else {
+            console.log("No matching documents found for deletion.");
+        }
+    } catch (error) {
+        console.error("Error deleting document:", error);
+    }
+}
+
+// Attach the function to the form submit event
+document.getElementById('reservationForm').addEventListener('submit', removeReservation);
 
 
